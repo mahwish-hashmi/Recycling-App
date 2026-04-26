@@ -1,5 +1,3 @@
-
-
 export class Product {
     id : Number
     name : string
