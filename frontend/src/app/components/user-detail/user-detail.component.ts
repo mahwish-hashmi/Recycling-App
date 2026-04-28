@@ -13,7 +13,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UserDetailComponent implements OnInit {
   user : User;
-  editMode : boolean = false;
+  editMode: boolean = false;
 
   name : string;
   username : string;
@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   address : string;
   phone : string;
 
+  
   constructor(private usersService : UsersService, private router : Router) { }
 
   ngOnInit(): void {

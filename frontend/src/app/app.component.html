@@ -1,49 +1,85 @@
-<div>
-    <style>
-        * {
-            color: white;
-        }
-        nav {
-            box-shadow: 5px 5px 20px #000;
-        }
-    </style>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-12 px-5 mb-5 fixed-top">
-        <a class="navbar-brand" href="#">Go Green</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<!-- ============================================================
+     app.component.html  —  Navbar + Router Outlet
+     ============================================================ -->
+<div class="app-shell">
 
-        <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto" style="flex-grow: 1;">
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="shop">Recycle</a>
-              </li>
-              <li *ngIf="!isTokenThere" class="nav-item" >
-                <a class="nav-link" routerLink="register">Register</a>
-              </li>
-              <li *ngIf="!isTokenThere" class="nav-item">
-                  <a class="nav-link" routerLink="login">Login</a>
-              </li>
-              <li *ngIf="isTokenThere" class="nav-item">
-                  <a class="nav-link" routerLink="account">Account</a>
-              </li>
-              <li *ngIf="isTokenThere" class="nav-item">
-                  <a class="nav-link" routerLink="Basket">Cart</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0 d-flex" (submit)="search()">
-              <input
-                  class="form-control mr-sm-2 bg-transparent text-success"
-                  type="search"
-                  placeholder="Search products"
-                  aria-label="Search"
-                  [(ngModel)]="term"
-                  name="term"
-              >
-              <button class="btn btn-outline-success my-2 my-sm-0 mx-3" type="submit">Search</button>
-            </form>
-          </div>
-          
-      </nav>
+  <!-- ── Navbar ── -->
+  <nav class="navbar" [class.navbar--scrolled]="scrolled">
+    <div class="navbar__inner">
+
+      <!-- Brand -->
+      <a class="navbar__brand" routerLink="/shop">
+        <span class="navbar__brand-icon">
+          <i class="fa-solid fa-leaf"></i>
+        </span>
+        <span class="navbar__brand-text">Go<strong>Green</strong></span>
+      </a>
+
+      <!-- Nav links -->
+      <ul class="navbar__links">
+        <li>
+          <a class="navbar__link" routerLink="/shop" routerLinkActive="navbar__link--active">
+            <i class="fa-solid fa-seedling"></i> Shop
+          </a>
+        </li>
+        <li *ngIf="!isTokenThere">
+          <a class="navbar__link" routerLink="/register" routerLinkActive="navbar__link--active">
+            Register
+          </a>
+        </li>
+        <li *ngIf="!isTokenThere">
+          <a class="navbar__link navbar__link--cta" routerLink="/login" routerLinkActive="navbar__link--active">
+            Sign in
+          </a>
+        </li>
+        <li *ngIf="isTokenThere">
+          <a class="navbar__link" routerLink="/account" routerLinkActive="navbar__link--active">
+            <i class="fa-regular fa-circle-user"></i> Account
+          </a>
+        </li>
+        <li *ngIf="isTokenThere">
+          <a class="navbar__link navbar__link--cart" routerLink="/cart" routerLinkActive="navbar__link--active">
+            <i class="fa-solid fa-basket-shopping"></i> Cart
+          </a>
+        </li>
+      </ul>
+
+      <!-- Search -->
+      <form class="navbar__search" (submit)="search()">
+        <i class="fa-solid fa-magnifying-glass navbar__search-icon"></i>
+        <input
+          class="navbar__search-input"
+          type="search"
+          placeholder="Search eco products…"
+          [(ngModel)]="term"
+          name="term"
+          aria-label="Search products"
+        />
+        <button class="navbar__search-btn" type="submit">Search</button>
+      </form>
+
+    </div>
+  </nav>
+
+  <!-- ── Page content ── -->
+  <main class="page-wrapper">
     <router-outlet></router-outlet>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__brand-icon"><i class="fa-solid fa-leaf"></i></span>
+        <span class="footer__brand-text">Go<strong>Green</strong></span>
+      </div>
+      <p class="footer__copy">© 2024 GoGreen · Sustainable marketplace for a better planet 🌍</p>
+      <div class="footer__links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
 </div>

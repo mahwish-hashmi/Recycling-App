@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -20,6 +20,13 @@ export class AppComponent {
 
     search () {
       this.router.navigate(["/shop", this.term]).then(() => window.location.reload())
+  }
+  
+  public scrolled = false;
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.scrolled = window.scrollY > 10;
   }
   
 }
